@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orders>
+    <order id="101">
+        <customer>Anders Andersson</customer>
+        <amount currency="SEK">1500</amount>
+        <status>COMPLETED</status>
+    </order>
+    <order id="102">
+        <customer>Maria Svensson</customer>
+        <amount currency="SEK">3200</amount>
+        <status>PENDING</status>
+    </order>
+</orders>

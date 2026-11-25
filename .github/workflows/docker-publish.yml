@@ -1,0 +1,32 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Hämta koden från GitHub-repot
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Logga in på Docker Hub med sparade Secrets
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 3. Bygg och pusha imagen till Docker Hub
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/xml-extractor-demo:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/xml-extractor-demo:${{ github.sha }}
